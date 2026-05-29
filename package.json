@@ -1,0 +1,24 @@
+{
+  "name": "gato-main",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vathi24/Gato.git"
+  },
+  "author": "Bastian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vathi24/Gato/issues"
+  },
+  "homepage": "https://github.com/vathi24/Gato#readme",
+  "description": "",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^5.2.1"
+  }
+}
