@@ -89,3 +89,194 @@ body{
 
 /* small utility */
 .hidden{display:none}
+
+/* Botón Flotante de Chat */
+.chat-button {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #7E98FF);
+  color: var(--on-primary);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(142, 166, 255, 0.3);
+  border: none;
+  transition: all 0.3s ease;
+  z-index: 999;
+  user-select: none;
+}
+
+.chat-button:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(142, 166, 255, 0.4);
+}
+
+.chat-button:active {
+  transform: scale(0.95);
+}
+
+.chat-icon {
+  font-size: 1.8rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.chat-tooltip {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  background: var(--surface);
+  color: #0F172A;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: var(--elevation-1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.chat-button:hover .chat-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive para el botón flotante */
+@media (max-width: 600px) {
+  .chat-button {
+    width: 50px;
+    height: 50px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .chat-icon {
+    font-size: 1.5rem;
+  }
+
+  .chat-tooltip {
+    bottom: 65px;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Sección Amurrado - Quiz de Gatos */
+#Amurrado {
+  padding: 3rem 0;
+  margin-top: 2rem;
+}
+
+#Amurrado h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 2rem 0;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.barra-lateral {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.barra-lateral a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--primary), rgba(142, 166, 255, 0.8));
+  color: var(--on-primary);
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(142, 166, 255, 0.25);
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.barra-lateral a:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(142, 166, 255, 0.35);
+  background: linear-gradient(135deg, #7E98FF, #6E8FFF);
+}
+
+.barra-lateral a:active {
+  transform: translateY(-2px);
+}
+
+.barra-lateral h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive para la sección Amurrado */
+@media (max-width: 900px) {
+  #Amurrado {
+    padding: 2rem 0;
+  }
+
+  #Amurrado h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .barra-lateral a {
+    padding: 0.9rem 1.8rem;
+    min-width: 180px;
+  }
+
+  .barra-lateral h4 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #Amurrado {
+    padding: 1.5rem 0;
+    margin-top: 1.5rem;
+  }
+
+  #Amurrado h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .barra-lateral {
+    padding: 0 1rem;
+  }
+
+  .barra-lateral a {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    min-width: auto;
+  }
+
+  .barra-lateral h4 {
+    font-size: 0.95rem;
+  }
+}

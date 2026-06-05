@@ -95,9 +95,9 @@
 
 
         <article id="Amurrado">
-            <h2 style="color :indigo; margin-top: 20px;">¿Quieres saber qué tipo de gato eres?</h2>
+            <h2>¿Quieres saber qué tipo de gato eres?</h2>
             <aside class="barra-lateral">
-                <a href="https://www.vam.ac.uk/mused/random/cat-personality-quiz-what-cat-am-i/">
+                <a href="https://www.vam.ac.uk/mused/random/cat-personality-quiz-what-cat-am-i/" target="_blank" rel="noopener noreferrer">
                     <h4>Haz el test aquí</h4>
                 </a>
             </aside>
@@ -139,6 +139,18 @@
             });
         });
     </script>
+
+    <!-- Botón Flotante de Chat -->
+    <div class="chat-button" id="chatButton" aria-label="Abrir chat de asistente" role="button" tabindex="0">
+        <span class="chat-icon">💬</span>
+        <span class="chat-tooltip">¿Necesitas ayuda?</span>
+    </div>
+
+    <!-- Script para extraer automáticamente los títulos de la página -->
+    <script src="titulo-extractor.js"></script>
+    
+    <!-- Script para manejar el chat -->
+    <script src="../services/chatService.js"></script>
 
 </body>
 

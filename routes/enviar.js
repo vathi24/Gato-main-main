@@ -1,7 +1,8 @@
 const path = require('path');
+const { validadcampos } = require('../middlewares/ideaMiddlewares');
 
 module.exports = (app) => {
-    app.post('/enviar', (req, res) => {
+    app.post('/enviar', validadcampos, (req, res) => {
         const { nombre, apellido, email, comentario } = req.body;
         console.log(`Datos recibidos: ${nombre} ${apellido} - ${email}`);
         // Redirigimos directamente al archivo estático /fenviado.html

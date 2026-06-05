@@ -1,0 +1,156 @@
+/* Estilos específicos para la página 404 */
+
+.error-section {
+    padding: 3rem 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.error-section .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.error-container {
+    text-align: left;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.error-section h1 {
+    font-size: 2.5rem;
+    color: #0F172A;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.error-description {
+    font-size: 1.25rem;
+    color: var(--muted);
+    margin: 0 0 0.75rem 0;
+    font-weight: 500;
+}
+
+.error-message {
+    font-size: 1rem;
+    color: #65737E;
+    margin: 0 0 2rem 0;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.error-actions .button {
+    padding: 0.75rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.error-actions .button.secondary {
+    background: linear-gradient(180deg, var(--secondary), #FF9EB8);
+    color: var(--on-primary);
+}
+
+.error-actions .button.secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 179, 198, 0.28);
+}
+
+.error-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cat-image {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 40px rgba(142, 166, 255, 0.15);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .error-section .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .error-code {
+        font-size: 6rem;
+    }
+
+    .error-section h1 {
+        font-size: 2rem;
+    }
+
+    .error-illustration {
+        order: -1;
+    }
+
+    .cat-image {
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-section {
+        padding: 2rem 0;
+        min-height: auto;
+    }
+
+    .error-code {
+        font-size: 4rem;
+    }
+
+    .error-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .error-description {
+        font-size: 1.125rem;
+    }
+
+    .error-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .error-actions .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cat-image {
+        max-width: 200px;
+    }
+}
