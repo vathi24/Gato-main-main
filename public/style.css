@@ -43,7 +43,7 @@ body{
 /* Cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--elevation-1);overflow:hidden;display:flex;flex-direction:column}
-.card-media{width:100%;height:160px;object-fit:cover}
+.card-media{width:100%;height:250px;object-fit:contain;background:var(--surface)}
 .card-body{padding:1rem}
 .card h3{margin:.25rem 0}
 
@@ -76,15 +76,136 @@ body{
 
 /* Responsive */
 @media (max-width:900px){
+  .container {
+    padding: 1rem 20px;
+  }
+  
   .form-grid{grid-template-columns:1fr}
   .main-nav ul{display:none}
   .main-nav.nav-open ul{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:var(--surface);box-shadow:var(--elevation-1);z-index:1000;padding:1rem}
   .nav-toggle{display:block}
 }
 
-@media (max-width:480px){
+@media (max-width:600px){
   .brand-title{font-size:1rem}
   .hero{padding:2rem 0}
+  
+  .container {
+    padding: 1rem 20px;
+  }
+  
+  /* Formulario responsivo */
+  .form-section {
+    padding: 1.25rem 0;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-field.full {
+    grid-column: 1/-1;
+  }
+  
+  .form-field label {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .form-field input,
+  .form-field textarea {
+    padding: 0.65rem;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  
+  .form-field textarea {
+    min-height: 100px;
+  }
+  
+  .form-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-actions.full {
+    justify-content: center;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+  
+  .button.primary {
+    min-width: 100%;
+  }
+  
+  /* Formulario inline responsivo */
+  .form-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  
+  .form-inline .form-field {
+    width: 100%;
+  }
+  
+  .form-inline .form-actions {
+    justify-content: center;
+  }
+  
+  .form-inline .button {
+    width: 100%;
+  }
+}
+
+@media (max-width:480px){
+  .brand-title{font-size:0.9rem}
+  .hero{padding:1.5rem 0}
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+  .hero-sub {
+    font-size: 1rem;
+  }
+  
+  .container {
+    padding: 1rem 20px;
+  }
+  
+  .form-section {
+    padding: 10px;
+  }
+  
+  .form-field input,
+  .form-field textarea {
+    padding: 0.6rem;
+    font-size: 16px;
+  }
+  
+  .form-field label {
+    font-size: 0.75rem;
+  }
+  
+  .button {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* small utility */
