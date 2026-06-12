@@ -1,50 +1,59 @@
-// ============================================================
-// chatService.js
-// Script para manejar la funcionalidad del botón flotante de chat
-// ============================================================
+const { readDb, writeDb } = require('../database/db');
 
-(function() {
-    'use strict';
+function normalizeRoom(room) {
+  return (room || 'General').trim() || 'General';
+}
 
-    // Función para inicializar el chat
-    function initializeChat() {
-        const chatButton = document.getElementById('chatButton');
-        
-        if (!chatButton) return;
+function getRooms() {
+  const db = readDb();
+  return db.rooms;
+}
 
-        // Event listener para click
-        chatButton.addEventListener('click', openChat);
+function createRoom(roomName) {
+  const db = readDb();
+  const room = normalizeRoom(roomName);
 
-        // Event listener para teclado (accesibilidad)
-        chatButton.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                openChat();
-            }
-        });
-    }
+  if (!db.rooms.includes(room)) {
+    db.rooms.push(room);
+    db.messages[room] = [];
+    writeDb(db);
+  }
 
-    // Función para abrir el chat
-    function openChat() {
-        // Aquí puedes integrar un chatbot real como:
-        // - Crisp Chat
-        // - Intercom
-        // - Freshchat
-        // - Drift
-        // - Etc.
-        
-        console.log('Chat abierto - Función disponible próximamente');
-        alert('Chat de asistente - Función disponible próximamente\n\nAquí pronto tendrás acceso a un asistente 24/7 para ayudarte.');
-    }
+  return room;
+}
 
-    // Inicializar cuando el DOM esté listo
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeChat);
-    } else {
-        initializeChat();
-    }
+function getMessagesByRoom(roomName) {
+  const db = readDb();
+  const room = normalizeRoom(roomName);
+  return db.messages[room] || [];
+}
 
-    // Exportar función para uso externo
-    window.openChat = openChat;
+function saveMessage({ room, user, text }) {
+  const db = readDb();
+  const targetRoom = normalizeRoom(room);
 
-})();
+  if (!db.rooms.includes(targetRoom)) {
+    db.rooms.push(targetRoom);
+    db.messages[targetRoom] = [];
+  }
+
+  const message = {
+    id: Date.now(),
+    room: targetRoom,
+    user: user || 'Anonimo',
+    text,
+    createdAt: new Date().toISOString(),
+  };
+
+  db.messages[targetRoom].push(message);
+  writeDb(db);
+
+  return message;
+}
+
+module.exports = {
+  getRooms,
+  createRoom,
+  getMessagesByRoom,
+  saveMessage,
+};
