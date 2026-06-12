@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gato Amurrado</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chat.css">
 </head>
 
 <body>
@@ -141,17 +142,31 @@
     </script>
 
     <!-- Botón Flotante de Chat -->
-    <div class="chat-button" id="chatButton" aria-label="Abrir chat de asistente" role="button" tabindex="0">
-        <span class="chat-icon">💬</span>
-        <span class="chat-tooltip">¿Necesitas ayuda?</span>
-    </div>
+     <button id="chat-fab" aria-label="Abrir chat">😸</button>
 
-    <!-- Script para extraer automáticamente los títulos de la página -->
-    <script src="titulo-extractor.js"></script>
-    
-    <!-- Script para manejar el chat -->
-    <script src="../services/chatService.js"></script>
+    <aside id="chat-panel" class="chat-panel hidden" aria-hidden="true">
+        <header class="chat-header">
+            <h2>Chat General</h2>
+            <button id="chat-close" aria-label="Cerrar chat">✕</button>
+        </header>
 
+        <div class="chat-room-bar">
+            <label for="room-select">Sala:</label>
+            <select id="room-select"></select>
+        </div>
+
+        <div id="message-container" class="messages"></div>
+
+        <form id="message-form" class="message-form">
+            <input type="text" id="message-input" placeholder="Escribe un mensaje..." required>
+            <button type="submit">Enviar</button>
+        </form>
+    </aside>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+    <script src="chat-floating.js"></script>
 </body>
 
 </html>
