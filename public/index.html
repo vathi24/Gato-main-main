@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gato Amurrado</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="chat.css">
 </head>
 
 <body>
@@ -155,10 +154,15 @@
             <select id="room-select"></select>
         </div>
 
-        <div id="message-container" class="messages"></div>
+        <div id="message-container" class="messages">
+            <div class="messages-loader" id="messages-loader">Cargando mensajes anteriores...</div>
+        </div>
 
         <form id="message-form" class="message-form">
-            <input type="text" id="message-input" placeholder="Escribe un mensaje..." required>
+            <button type="button" id="emoji-btn" class="chat-action-btn" aria-label="Emojis">😊</button>
+            <button type="button" id="file-btn" class="chat-action-btn" aria-label="Adjuntar archivo">📎</button>
+            <input type="file" id="file-input" hidden>
+            <input type="text" id="message-input" placeholder="Escribe un mensaje..." required autocomplete="off">
             <button type="submit">Enviar</button>
         </form>
     </aside>
@@ -166,7 +170,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
-    <script src="chat-floating.js"></script>
 </body>
 
 </html>

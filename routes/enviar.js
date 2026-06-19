@@ -1,15 +1,20 @@
 const path = require('path');
-const { validadcampos } = require('../middlewares/ideaMiddlewares');
+
+function validarContacto(req, res, next) {
+    const { nombre, apellido, email, comentario } = req.body;
+    if (!nombre || !apellido || !email || !comentario) {
+        return res.status(400).sendFile(path.join(__dirname, '..', 'public', 'contacto-error.html'));
+    }
+    next();
+}
 
 module.exports = (app) => {
-    app.post('/enviar', validadcampos, (req, res) => {
+    app.post('/enviar', validarContacto, (req, res) => {
         const { nombre, apellido, email, comentario } = req.body;
         console.log(`Datos recibidos: ${nombre} ${apellido} - ${email}`);
-        // Redirigimos directamente al archivo estático /fenviado.html
         res.redirect('/fenviado.html');
     });
 
-    // Servir /fenviado como página estática (archivo public/fenviado.html)
     app.get('/fenviado', (req, res) => {
         res.sendFile(path.join(__dirname, '..', 'public', 'fenviado.html'));
     });

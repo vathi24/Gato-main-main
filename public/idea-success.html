@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Enviado | Gato Amurrado</title>
+    <title>Idea enviada | Gato Amurrado</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fenviado.css">
 </head>
-
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -16,15 +13,12 @@
                 <img src="imagen.avif" alt="Gato logo" class="brand-logo">
                 <span class="brand-title">Gato Amurrado</span>
             </a>
-
             <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
-
             <nav id="main-nav" class="main-nav" aria-label="Menú principal">
                 <ul>
                     <li><a href="/">Inicio</a></li>
                     <li><a href="/#servicios">Servicios</a></li>
                     <li><a href="/#contacto">Contáctanos</a></li>
-                    <li><a href="/#horarios">Horarios</a></li>
                 </ul>
             </nav>
         </div>
@@ -35,20 +29,14 @@
             <div class="container">
                 <div class="success-container">
                     <div class="success-icon">✓</div>
-                    <h1 id="success-title">¡Formulario Enviado!</h1>
-                    <p class="success-description">
-                        Gracias por tu confianza y por contactarnos.
-                    </p>
+                    <h1 id="success-title">¡Idea registrada!</h1>
+                    <p class="success-description" id="success-name"></p>
                     <p class="success-message">
-                        Tu mensaje fue recibido correctamente. Nos pondremos en contacto contigo pronto.
+                        Gracias por compartir tu idea con nosotros. La revisaremos pronto.
                     </p>
                     <div class="success-actions">
                         <a href="/" class="button primary">Volver al Inicio</a>
-                        <a href="/#contacto" class="button secondary">Enviar otro mensaje</a>
                     </div>
-                </div>
-                <div class="success-illustration">
-                    <img src="pibble.gif" alt="Gato feliz" class="cat-image">
                 </div>
             </div>
         </section>
@@ -56,33 +44,22 @@
 
     <footer class="site-footer">
         <div class="container footer-inner">
-            <p>&copy; 2024 Gato Amurrado. Todos los derechos reservados.</p>
-            <nav aria-label="Enlaces del pie">
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
+            <p>&copy; 2026 - Programación Web IP-CFT Santo Tomás</p>
+            <nav aria-label="Enlaces útiles">
+                <a href="#">Política</a>
                 <a href="#">Contacto</a>
             </nav>
         </div>
     </footer>
 
-    <!-- Botón Flotante de Chat -->
-    <div class="chat-button" id="chatButton" aria-label="Abrir chat de asistente" role="button" tabindex="0">
-        <span class="chat-icon">💬</span>
-        <span class="chat-tooltip">¿Necesitas ayuda?</span>
-    </div>
-
     <script>
-        // Script para el menú móvil
-        document.querySelector('.nav-toggle')?.addEventListener('click', function() {
-            document.querySelector('.main-nav').classList.toggle('nav-open');
-            this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false');
-        });
+        const params = new URLSearchParams(window.location.search);
+        const nombre = params.get('nombre');
+        const departamento = params.get('departamento');
+        const nameEl = document.getElementById('success-name');
+        if (nombre) {
+            nameEl.textContent = `Gracias ${decodeURIComponent(nombre)} (${decodeURIComponent(departamento || '')}) por tu idea.`;
+        }
     </script>
-
-    <!-- Script para extraer automáticamente los títulos de la página -->
-    <script src="titulo-extractor.js"></script>
-    
-
 </body>
-
 </html>

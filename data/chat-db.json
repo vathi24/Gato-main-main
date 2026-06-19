@@ -17,6 +17,43 @@
         "user": "Bastian",
         "text": "Buenas Tardes",
         "createdAt": "2026-06-12T16:25:54.258Z"
+      },
+      {
+        "id": 1781878031579,
+        "room": "General",
+        "user": "bastian",
+        "text": "hola",
+        "file": null,
+        "createdAt": "2026-06-19T14:07:11.579Z"
+      },
+      {
+        "id": 1781878092705,
+        "room": "General",
+        "user": "bastian",
+        "text": null,
+        "file": {
+          "url": "/uploads/1781878092693-xk6rdh.docx",
+          "name": "Mejoras.docx",
+          "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "size": 77692
+        },
+        "createdAt": "2026-06-19T14:08:12.705Z"
+      },
+      {
+        "id": 1781878133178,
+        "room": "General",
+        "user": "bastian",
+        "text": "😒",
+        "file": null,
+        "createdAt": "2026-06-19T14:08:53.178Z"
+      },
+      {
+        "id": 1781878455788,
+        "room": "General",
+        "user": "juaan",
+        "text": "🫂",
+        "file": null,
+        "createdAt": "2026-06-19T14:14:15.788Z"
       }
     ]
   }

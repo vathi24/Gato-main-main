@@ -1,5 +1,7 @@
 const { readDb, writeDb } = require('../database/db');
 
+const MESSAGES_PER_PAGE = 30;
+
 function normalizeRoom(room) {
   return (room || 'General').trim() || 'General';
 }
@@ -22,13 +24,21 @@ function createRoom(roomName) {
   return room;
 }
 
-function getMessagesByRoom(roomName) {
+function getMessagesByRoom(roomName, offset = 0, limit = MESSAGES_PER_PAGE) {
   const db = readDb();
   const room = normalizeRoom(roomName);
-  return db.messages[room] || [];
+  const all = db.messages[room] || [];
+  const total = all.length;
+  const start = Math.max(0, total - offset - limit);
+  const end = Math.max(0, total - offset);
+  return {
+    messages: all.slice(start, end),
+    total,
+    hasMore: start > 0,
+  };
 }
 
-function saveMessage({ room, user, text }) {
+function saveMessage({ room, user, text, file }) {
   const db = readDb();
   const targetRoom = normalizeRoom(room);
 
@@ -41,7 +51,8 @@ function saveMessage({ room, user, text }) {
     id: Date.now(),
     room: targetRoom,
     user: user || 'Anonimo',
-    text,
+    text: text || null,
+    file: file || null,
     createdAt: new Date().toISOString(),
   };
 
