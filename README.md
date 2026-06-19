@@ -1,10 +1,10 @@
-# 🐱 Gato - Aplicación Web Interactiva
+# Gato - Aplicación Web Interactiva
 
 **Gato** es una aplicación web full-stack construida con **Node.js y Express.js** que proporciona funcionalidades avanzadas de comunicación en tiempo real, gestión de ideas y web scraping. El proyecto implementa una arquitectura MVC (Modelo-Vista-Controlador) bien estructurada con APIs RESTful y comunicación mediante WebSockets.
 
 ---
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 1. [Descripción General](#descripción-general)
 2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
@@ -19,7 +19,7 @@
 
 ---
 
-## 📌 Descripción General
+##  Descripción General
 
 **Gato** es una plataforma que integra múltiples módulos interconectados:
 
@@ -31,7 +31,7 @@
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
 ### Backend
 - **Node.js**: Entorno de ejecución JavaScript del lado servidor
@@ -52,7 +52,7 @@
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 El proyecto sigue el patrón **MVC (Modelo-Vista-Controlador)** complementado con una capa de servicios:
 
@@ -85,16 +85,16 @@ El proyecto sigue el patrón **MVC (Modelo-Vista-Controlador)** complementado co
 
 ---
 
-## 📁 Estructura de Carpetas
+## Estructura de Carpetas
 
 ```
 Gato-main-main/
 │
-├── 📄 server.js                    # Punto de entrada principal del servidor
-├── 📄 package.json                 # Configuración del proyecto y dependencias
-├── 📄 README.md                    # Documentación del proyecto
+├── server.js                    # Punto de entrada principal del servidor
+├──  package.json                 # Configuración del proyecto y dependencias
+├──  README.md                    # Documentación del proyecto
 │
-├── 📂 public/                      # Archivos estáticos (interfaz del usuario)
+├──  public/                      # Archivos estáticos (interfaz del usuario)
 │   ├── index.html                  # Página principal
 │   ├── panel.html                  # Panel de control
 │   ├── 404.html                    # Página de error 404
@@ -112,7 +112,7 @@ Gato-main-main/
 │   ├── titulo-extractor.js         # Herramienta para extraer títulos
 │   └── imagen.avif                 # Imagen del proyecto
 │
-├── 📂 routes/                      # Definición de rutas y endpoints
+├──  routes/                      # Definición de rutas y endpoints
 │   ├── ideaRoutes.js               # Rutas para gestión de ideas
 │   ├── chatRoutes.js               # Rutas para el chat
 │   ├── cheerioRoutes.js            # Rutas para web scraping
@@ -120,31 +120,31 @@ Gato-main-main/
 │   ├── login.js                    # Rutas de autenticación
 │   └── scraping.js                 # Rutas de scraping avanzado
 │
-├── 📂 controllers/                 # Lógica de procesamiento
+├──  controllers/                 # Lógica de procesamiento
 │   ├── ideaController.js           # Controlador de ideas
 │   ├── chatController.js           # Controlador de chat
 │   └── cheerioController.js        # Controlador de scraping
 │
-├── 📂 services/                    # Lógica de negocio
+├──  services/                    # Lógica de negocio
 │   ├── chatService.js              # Servicios de chat
 │   └── scrapingService.js          # Servicios de web scraping
 │
-├── 📂 socket/                      # WebSockets (comunicación en tiempo real)
+├──  socket/                      # WebSockets (comunicación en tiempo real)
 │   └── chatSocket.js               # Manejador de eventos Socket.IO
 │
-├── 📂 middleware/                  # Funciones de filtrado
+├──  middleware/                  # Funciones de filtrado
 │   └── ideaMiddlewares.js          # Validaciones de ideas
 │
-├── 📂 database/                    # Configuración de base de datos
+├──  database/                    # Configuración de base de datos
 │   └── db.js                       # Conexiones y queries
 │
-└── 📂 data/                        # Almacenamiento de datos
+└──  data/                        # Almacenamiento de datos
     └── chat-db.json                # Base de datos de mensajes de chat
 ```
 
 ---
 
-## 🚀 Instalación y Ejecución
+##  Instalación y Ejecución
 
 ### Requisitos Previos
 - **Node.js** v14 o superior
@@ -186,18 +186,11 @@ Abre tu navegador en:
 http://localhost:3000
 ```
 
-**Nota:** El puerto por defecto es **3000**, pero se puede cambiar configurando la variable de entorno `PORT`:
-```bash
-set PORT=8080    # Windows
-export PORT=8080 # Linux/Mac
-npm start
-```
-
 ---
 
-## ✨ Funcionalidades Principales
+##  Funcionalidades Principales
 
-### 1. **Chat en Tiempo Real** 💬
+### 1. **Chat en Tiempo Real** 
 Sistema de salas de chat con comunicación instantánea usando WebSockets.
 
 **Características:**
@@ -227,7 +220,7 @@ socket.on('notification', (data) => { /* notificaciones */ })
 
 ---
 
-### 2. **Gestión de Ideas** 💡
+### 2. **Gestión de Ideas** 
 Formulario para que usuarios registren sus ideas con validación automática.
 
 **Características:**
@@ -256,7 +249,7 @@ router.post('/registrar-idea',
 
 ---
 
-### 3. **Web Scraping** 🕷️
+### 3. **Web Scraping** 
 Herramienta para extraer información de sitios web.
 
 **Características:**
@@ -278,7 +271,7 @@ exports.extraerTitulos(htmlContent)   # Extrae todos los títulos
 
 ---
 
-### 4. **Autenticación** 🔐
+### 4. **Autenticación** 
 Sistema básico de login con gestión de sesiones.
 
 **Características:**
@@ -293,7 +286,7 @@ POST /login                           # Iniciar sesión
 
 ---
 
-### 5. **Carga de Archivos** 📁
+### 5. **Carga de Archivos** 
 Sistema de carga con validación de tamaño y tipo.
 
 **Características:**
@@ -309,7 +302,7 @@ POST /api/chat/upload                 # Subir archivo
 
 ---
 
-## 📡 Guía de Endpoints
+##  Guía de Endpoints
 
 ### Chat API
 
@@ -336,21 +329,6 @@ curl -X POST http://localhost:3000/api/chat/rooms \
 
 ---
 
-### Ideas API
-
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| POST | `/api/registrar-idea` | Registra una nueva idea |
-
-**Ejemplo - Registrar Idea:**
-```bash
-curl -X POST http://localhost:3000/api/registrar-idea \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "titulo=Mi%20Idea&descripcion=Una%20descripcion%20detallada&categoria=Tecnologia&email=usuario@example.com"
-```
-
----
-
 ### Web Scraping
 
 | Método | Ruta | Descripción |
@@ -360,7 +338,7 @@ curl -X POST http://localhost:3000/api/registrar-idea \
 
 ---
 
-## 🔄 Flujo de Datos
+## Flujo de Datos
 
 ### 1. Flujo de Chat en Tiempo Real
 
@@ -430,7 +408,7 @@ Cliente
 
 ---
 
-## ⚙️ Configuración y Customización
+##  Configuración y Customización
 
 ### Cambiar Puerto del Servidor
 Edita `server.js`:
@@ -449,22 +427,6 @@ En `controllers/chatController.js`:
 ```javascript
 const limit = parseInt(req.query.limit) || 30; // Cambiar 30
 ```
-
-### Agregar Nueva Ruta
-1. Crear archivo en `routes/nuevaRuta.js`
-2. Registrar en `server.js`:
-```javascript
-const nuevaRuta = require('./routes/nuevaRuta');
-app.use('/api', nuevaRuta);
-```
-
-### Agregar Validación Personalizada
-1. Crear función en `middleware/ideaMiddlewares.js`
-2. Usar en la ruta:
-```javascript
-router.post('/endpoint', miMiddleware, controlador);
-```
-
 ---
 
 ## 📊 Variables de Entorno
@@ -481,35 +443,7 @@ NODE_ENV=production
 
 ---
 
-## 🐛 Troubleshooting
-
-### Error: "Port already in use"
-```bash
-# Windows
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-
-# Linux/Mac
-lsof -i :3000
-kill -9 <PID>
-```
-
-### Error: "Module not found"
-```bash
-npm install
-```
-
-### Chat no funciona en tiempo real
-- Verificar que Socket.IO está conectado en la consola del navegador
-- Comprobar en DevTools → Network → WS
-
-### Archivos no se suben
-- Verificar permisos de la carpeta `/uploads`
-- Comprobar tamaño del archivo (máx. 10 MB)
-
----
-
-## 📝 Información del Proyecto
+##  Información del Proyecto
 
 - **Versión**: 1.0.0
 - **Licencia**: ISC
@@ -517,7 +451,7 @@ npm install
 
 ---
 
-## 👨‍💻 Autor
+## Autor
 
 - **Nombre:** Bastian Morales
 - **Carrera:** Ingeniería en Informática / Analista Programador
@@ -525,7 +459,7 @@ npm install
 
 ---
 
-## 📖 Recursos Útiles
+## Recursos Útiles
 
 - [Express.js Documentation](https://expressjs.com/)
 - [Socket.IO Documentation](https://socket.io/)
@@ -534,4 +468,4 @@ npm install
 
 ---
 
-**¡Gracias por usar Gato! 🐱**
+**¡Gracias por usar Gato! **
