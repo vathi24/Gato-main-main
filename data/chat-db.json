@@ -54,6 +54,108 @@
         "text": "🫂",
         "file": null,
         "createdAt": "2026-06-19T14:14:15.788Z"
+      },
+      {
+        "id": 1783095794528,
+        "room": "General",
+        "user": "ae",
+        "text": "dddd",
+        "file": null,
+        "createdAt": "2026-07-03T16:23:14.528Z"
+      },
+      {
+        "id": 1783095900056,
+        "room": "General",
+        "user": "ee",
+        "text": "adasd",
+        "file": null,
+        "createdAt": "2026-07-03T16:25:00.056Z"
+      },
+      {
+        "id": 1783096543745,
+        "room": "General",
+        "user": "ee",
+        "text": "d",
+        "file": null,
+        "createdAt": "2026-07-03T16:35:43.745Z"
+      },
+      {
+        "id": 1783097990042,
+        "room": "General",
+        "user": "aaad",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783097990034-55hj3j.jpg",
+          "name": "images.jpg",
+          "type": "image/jpeg",
+          "size": 26022
+        },
+        "createdAt": "2026-07-03T16:59:50.042Z"
+      },
+      {
+        "id": 1783098258392,
+        "room": "General",
+        "user": "aaaaaaaa",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783098258387-dtphr1.jpg",
+          "name": "images.jpg",
+          "type": "image/jpeg",
+          "size": 26022
+        },
+        "createdAt": "2026-07-03T17:04:18.392Z"
+      },
+      {
+        "id": 1783098266930,
+        "room": "General",
+        "user": "aaaaaaaa",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783098266923-hlu5qt.docx",
+          "name": "IEI054_U3_S17_3_5_EVALUACION_UMM.docx",
+          "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "size": 100316
+        },
+        "createdAt": "2026-07-03T17:04:26.930Z"
+      },
+      {
+        "id": 1783098915466,
+        "room": "General",
+        "user": "dasddddddasd",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783098915462-hko8x6.jpg",
+          "name": "images.jpg",
+          "type": "image/jpeg",
+          "size": 26022
+        },
+        "createdAt": "2026-07-03T17:15:15.466Z"
+      },
+      {
+        "id": 1783098920782,
+        "room": "General",
+        "user": "dasddddddasd",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783098920778-yz6scn.docx",
+          "name": "1783098266923-hlu5qt.docx",
+          "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+          "size": 100316
+        },
+        "createdAt": "2026-07-03T17:15:20.782Z"
+      },
+      {
+        "id": 1783099479715,
+        "room": "General",
+        "user": "a",
+        "text": null,
+        "file": {
+          "url": "/uploads/1783099479608-6xxm9q.zip",
+          "name": "pagina web.zip",
+          "type": "application/x-zip-compressed",
+          "size": 19792900
+        },
+        "createdAt": "2026-07-03T17:24:39.715Z"
       }
     ]
   }

@@ -41,7 +41,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
+  limits: { fileSize: 1024 * 1024 * 1024 },
 });
 const chatUpload = upload.single('file');
 
@@ -59,7 +59,7 @@ app.post('/api/chat/upload', (req, res, next) => {
   chatUpload(req, res, (err) => {
     if (err) {
       const message = err.code === 'LIMIT_FILE_SIZE'
-        ? 'El archivo excede el límite de 10 MB.'
+        ? 'El archivo excede el límite de 1 GB.'
         : 'Error al subir el archivo.';
       return res.status(400).json({ error: message });
     }

@@ -11,6 +11,8 @@ const emojiBtn = document.getElementById('emoji-btn');
 const fileBtn = document.getElementById('file-btn');
 const fileInput = document.getElementById('file-input');
 const messagesLoader = document.getElementById('messages-loader');
+const typingIndicator = document.getElementById('typing-indicator');
+const typingUserEl = document.querySelector('.typing-user');
 
 let currentRoom = 'General';
 let username = '';
@@ -19,6 +21,8 @@ let isLoadingMore = false;
 let messagesOffset = 0;
 let hasMoreMessages = true;
 let emojiPicker = null;
+let typingTimeout = null;
+let isCurrentlyTyping = false;
 
 function playNotificationSound() {
   try {
@@ -45,6 +49,32 @@ function showDesktopNotification(title, body) {
   } else if (Notification.permission !== 'denied') {
     Notification.requestPermission();
   }
+}
+
+function showTypingIndicator(user) {
+  const el = document.getElementById('typing-indicator');
+  const nameEl = el?.querySelector('.typing-user');
+  if (nameEl) nameEl.textContent = `${user} está escribiendo`;
+  if (el) el.classList.remove('hidden');
+  messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+
+function hideTypingIndicator() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.classList.add('hidden');
+}
+
+function emitTypingEvent() {
+  if (!isCurrentlyTyping) {
+    isCurrentlyTyping = true;
+    socket.emit('userTyping', { room: currentRoom, user: username });
+  }
+  
+  clearTimeout(typingTimeout);
+  typingTimeout = setTimeout(() => {
+    isCurrentlyTyping = false;
+    socket.emit('userStoppedTyping', { room: currentRoom, user: username });
+  }, 3000);
 }
 
 async function requestUsername() {
@@ -84,7 +114,20 @@ function openChat() {
   messageInput.focus();
 }
 
-function closeChat() {
+async function closeChat() {
+  const text = messageInput.value.trim();
+  if (text && typeof Swal !== 'undefined') {
+    const result = await Swal.fire({
+      title: '¿Cerrar chat?',
+      text: 'Tienes un mensaje sin enviar. ¿Estás seguro de cerrar el chat?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, cerrar',
+      cancelButtonText: 'Cancelar',
+    });
+    if (!result.isConfirmed) return;
+  }
+  emojiPickerVisible = false;
   chatPanel.classList.add('hidden');
   chatPanel.setAttribute('aria-hidden', 'true');
   chatFab.classList.remove('hidden');
@@ -302,6 +345,13 @@ async function loadRooms() {
 }
 
 function joinRoom(room) {
+  // Limpiar typing indicator cuando se cambia de sala
+  hideTypingIndicator();
+  if (isCurrentlyTyping) {
+    isCurrentlyTyping = false;
+    clearTimeout(typingTimeout);
+  }
+  
   currentRoom = room;
   socket.emit('joinRoom', { room: currentRoom, username });
 }
@@ -337,6 +387,14 @@ messageForm.addEventListener('submit', (event) => {
   }
 
   socket.emit('sendMessage', { text });
+  
+  // Detener indicador de escritura
+  if (isCurrentlyTyping) {
+    isCurrentlyTyping = false;
+    clearTimeout(typingTimeout);
+    socket.emit('userStoppedTyping', { room: currentRoom, user: username });
+  }
+  
   messageInput.value = '';
   messageInput.focus();
 });
@@ -351,6 +409,12 @@ messageInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
     messageForm.dispatchEvent(new Event('submit'));
+  }
+});
+
+messageInput.addEventListener('input', () => {
+  if (messageInput.value.trim().length > 0) {
+    emitTypingEvent();
   }
 });
 
@@ -418,19 +482,17 @@ fileBtn.addEventListener('click', () => {
 
 fileInput.addEventListener('change', async () => {
   const file = fileInput.files[0];
-  if (!file) {
-    return;
-  }
+  if (!file) return;
 
-  if (file.size > 10 * 1024 * 1024) {
+  if (file.size > 1024 * 1024 * 1024) {
     if (typeof Swal !== 'undefined') {
       await Swal.fire({
         icon: 'error',
         title: 'Archivo muy grande',
-        text: 'El archivo excede el límite de 10 MB.',
+        text: 'El archivo excede el límite de 1 GB.',
       });
     } else {
-      alert('El archivo excede el límite de 10 MB.');
+      alert('El archivo excede el límite de 1 GB.');
     }
     fileInput.value = '';
     return;
@@ -442,33 +504,53 @@ fileInput.addEventListener('change', async () => {
   fileBtn.disabled = true;
   fileBtn.textContent = '⏳';
 
+  const progressBar = document.getElementById('upload-progress');
+  const progressFill = document.getElementById('upload-progress-fill');
+  const progressText = document.getElementById('upload-progress-text');
+  if (progressBar) {
+    progressBar.classList.remove('hidden');
+    progressBar.classList.add('loading');
+    progressBar.setAttribute('aria-valuenow', '0');
+  }
+  if (progressFill) progressFill.style.width = '0%';
+  if (progressText) progressText.textContent = '0%';
+
   try {
     const response = await fetch('/api/chat/upload', {
       method: 'POST',
       body: formData,
     });
 
-    if (!response.ok) {
-      throw new Error('Error al subir archivo');
+    if (response.ok) {
+      const data = await response.json();
+      socket.emit('sendFileMessage', { file: data.file });
+    } else {
+      let errorBody = '';
+      try { errorBody = await response.text(); } catch (_) {}
+      throw new Error(`HTTP ${response.status}: ${errorBody || 'Error al subir archivo'}`);
     }
-
-    const data = await response.json();
-
-    socket.emit('sendFileMessage', { file: data.file });
   } catch (e) {
+    console.error('[Upload] Error:', e.message);
     if (typeof Swal !== 'undefined') {
       await Swal.fire({
         icon: 'error',
-        title: 'Error',
-        text: 'No se pudo subir el archivo. Intenta de nuevo.',
+        title: 'Error al subir archivo',
+        text: e.message,
       });
     } else {
-      alert('No se pudo subir el archivo.');
+      alert(e.message);
     }
   } finally {
     fileBtn.disabled = false;
     fileBtn.textContent = '📎';
     fileInput.value = '';
+    if (progressBar) {
+      progressBar.classList.add('hidden');
+      progressBar.classList.remove('loading');
+    }
+    if (progressFill) progressFill.style.width = '0%';
+    if (progressText) progressText.textContent = '0%';
+    if (progressBar) progressBar.setAttribute('aria-valuenow', '0');
   }
 });
 
@@ -501,6 +583,20 @@ socket.on('notification', (data) => {
   if (data.type === 'join') {
     playNotificationSound();
     showDesktopNotification('Nuevo usuario', data.text);
+  }
+});
+
+socket.on('userTyping', ({ user, room }) => {
+  console.log('[Typing] Recibido userTyping:', { user, room, currentRoom, username, match: room === currentRoom && user !== username });
+  if (room === currentRoom && user !== username) {
+    showTypingIndicator(user);
+  }
+});
+
+socket.on('userStoppedTyping', ({ room }) => {
+  console.log('[Typing] Recibido userStoppedTyping:', { room, currentRoom });
+  if (room === currentRoom) {
+    hideTypingIndicator();
   }
 });
 

@@ -78,6 +78,26 @@ function registerChatSocket(io) {
         callback(result);
       }
     });
+
+    socket.on('userTyping', ({ room, user }) => {
+      const safeRoom = chatService.createRoom(room || 'General');
+      console.log('Server received userTyping:', { room: safeRoom, user, socketUsername: socket.data.username });
+      socket.to(safeRoom).emit('userTyping', {
+        room: safeRoom,
+        user,
+        socketId: socket.id,
+      });
+    });
+
+    socket.on('userStoppedTyping', ({ room, user }) => {
+      const safeRoom = chatService.createRoom(room || 'General');
+      console.log('Server received userStoppedTyping:', { room: safeRoom, user, socketUsername: socket.data.username });
+      socket.to(safeRoom).emit('userStoppedTyping', {
+        room: safeRoom,
+        user,
+        socketId: socket.id,
+      });
+    });
   });
 }
 

@@ -93,6 +93,27 @@ body{
 
 /* Forms */
 .form-section{padding:1.5rem 0}
+
+/* Password visibility toggle */
+.password-wrapper{position:relative;display:flex;align-items:center;width:100%}
+.password-wrapper input{flex:1;padding-right:3rem;width:100%}
+.password-toggle{
+  position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;cursor:pointer;font-size:1.25rem;
+  padding:.25rem;line-height:1;color:var(--muted);
+  border-radius:6px;transition:all 0.2s ease;display:flex;align-items:center;justify-content:center;z-index:1;
+}
+.password-toggle:hover{color:var(--primary);background:rgba(142,166,255,0.08)}
+.password-toggle:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+/* File upload progress bar */
+.upload-progress{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;background:var(--bg);border-radius:8px;margin:.25rem .5rem}
+.upload-progress.hidden{display:none}
+.upload-progress-bar{flex:1;height:6px;background:var(--border-color);border-radius:3px;overflow:hidden;position:relative}
+.upload-progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--primary),#7E98FF);border-radius:3px;transition:width .3s ease;width:0%}
+.upload-progress.loading .upload-progress-bar-fill{width:30%;animation:uploadIndeterminate 1.5s ease-in-out infinite}
+.upload-progress-text{font-size:.75rem;color:var(--muted);min-width:2.5rem;text-align:right;flex-shrink:0}
+@keyframes uploadIndeterminate{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
 .form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
 .form-field{display:flex;flex-direction:column}
 .form-field.full{grid-column:1/-1}
@@ -933,12 +954,14 @@ body{
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: var(--bg);
-  border: 1px solid var(--border-color);
-  width: fit-content;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  padding: 8px 14px;
+  border-radius: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
 }
 
 .typing-indicator.hidden {

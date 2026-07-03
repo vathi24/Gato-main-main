@@ -86,6 +86,22 @@
     font-style: italic;
 }
 
+.message-item.typing-indicator {
+    background: #e3f2fd;
+    color: #1976d2;
+    font-style: italic;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
 .message-form {
     border-top: 1px solid var(--line);
     display: flex;

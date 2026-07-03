@@ -18,7 +18,7 @@
 
 .panel-hero h1 {
     font-size: 2.5rem;
-    color: #0F172A;
+    color: var(--text-primary);
     margin: 0 0 0.5rem 0;
     font-weight: 700;
 }
@@ -95,7 +95,7 @@
 
 .info-item .label {
     font-weight: 600;
-    color: #0F172A;
+    color: var(--text-primary);
 }
 
 .info-item .value {
@@ -123,10 +123,10 @@
     background: linear-gradient(135deg, rgba(142, 166, 255, 0.08), rgba(205, 234, 192, 0.08));
     border-radius: 10px;
     text-decoration: none;
-    color: #0F172A;
+    color: var(--text-primary);
     transition: all 0.2s ease;
     cursor: pointer;
-    border: 1px solid rgba(142, 166, 255, 0.1);
+    border: 1px solid var(--border-color);
 }
 
 .action-link:hover {
@@ -179,7 +179,7 @@
 
 /* Información General */
 .panel-card.full-width .card-body p {
-    color: #65737E;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1rem;
 }
@@ -189,7 +189,7 @@
     border-left: 4px solid var(--primary);
     padding: 1rem;
     border-radius: 8px;
-    color: #0F172A;
+    color: var(--text-primary);
     margin-top: 1rem;
 }
 
